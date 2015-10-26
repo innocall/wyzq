@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/top_height"
+    android:layout_alignParentTop="true"
+    android:background="@drawable/bg_title" >
+
+    <!-- 3种类型的标题 -->
+
+    <RelativeLayout
+        android:id="@+id/ii_common_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ii_login_title"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <ImageButton
+            android:id="@+id/top_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/top_back2"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/top_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="天健花园"
+            android:textColor="#5F5F5F"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ii_login_title3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
+
+        <ImageButton
+            android:id="@+id/top_back3"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/top_back2"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/top_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+
+         <Button
+            android:id="@+id/top_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:background="#FFFFFF"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="2dp"
+            android:textColor="#FF5000"
+            android:textSize="16sp" /> 
+    </RelativeLayout>
+    
+    
+     <RelativeLayout
+        android:id="@+id/ii_login_title4"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
+
+        <ImageButton
+            android:id="@+id/top_back4"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/top_back2"
+            android:scaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/top_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+
+         <ImageButton
+            android:id="@+id/top_right4"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/top_rig"
+            android:scaleType="fitCenter"/> 	
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,1 @@
+package com.lemon95.wyzq.wxapi;import com.umeng.socialize.weixin.view.WXCallbackActivity;public class WXEntryActivity extends WXCallbackActivity {}

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/ii_title"
+        layout="@layout/top_activity" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/type1"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="选择身份"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_orange"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type3"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_orange"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="房屋信息"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_orange_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type5"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="账号信息"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="@dimen/login_left_15"
+        android:text="选择您的房屋信息"
+        android:textColor="#4F5151"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/ye0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="城市"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/city_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/city_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignRight="@id/ye0"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dim_left_dp"
+                android:layout_marginRight="@dimen/dim_50_dp2"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/login_left_15"
+            android:layout_marginRight="@dimen/login_left_15"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/xiaoqu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/ye1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="小区"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/xiaoqu_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/xiaoqu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignRight="@id/ye1"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dim_left_dp"
+                android:layout_marginRight="@dimen/dim_50_dp2"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/login_left_15"
+            android:layout_marginRight="@dimen/login_left_15"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/fanghao"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="房号"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/fang_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/fanghao_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dim_left_dp"
+                android:layout_marginRight="@dimen/dim_50_dp2"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/rig_but"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/login_button_height_44"
+        android:layout_marginLeft="@dimen/login_left_15"
+        android:layout_marginRight="@dimen/login_left_15"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/login_but"
+        android:text="下一步"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+</LinearLayout>

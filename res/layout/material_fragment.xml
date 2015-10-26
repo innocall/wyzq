@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您当前没有房下账号"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#7F7F7F"/>
+    
+    
+    <ListView 
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#AAAAAA"
+        android:dividerHeight="0.5dp"
+        android:fadeScrollbars="false"
+        android:listSelector="#00000000"
+        android:scrollbars="none"
+        android:visibility="gone"></ListView>
+
+</LinearLayout>

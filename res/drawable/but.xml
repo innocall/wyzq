@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- angle渐变接到，0从左到右，90从下到上 -->
+    <gradient  android:endColor="#FFFFFF" android:centerColor="#FFFFFF"
+        android:startColor="#FFFFFF" android:angle="0" />
+    <corners android:radius="3dp"></corners>
+    <stroke android:width="0.8dip" android:color="#EC2E2E"></stroke>
+</shape>

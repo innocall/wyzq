@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- angle渐变接到，0从左到右，90从下到上 -->
+   
+    <stroke android:width="1dip" android:color="#FFFFFF"></stroke>
+    <solid android:color="#55000000"/>
+</shape>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="special_time">
+        <item>亲属</item>
+        <item>租客</item>
+    </string-array>
+    
+     <string-array name="special_time2">
+        <item>投诉类型一</item>
+        <item>投诉类型二</item>
+        <item>投诉类型三</item>
+        <item>投诉类型四</item>
+    </string-array>
+    
+</resources>

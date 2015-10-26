@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/ii_title"
+        layout="@layout/top_activity" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/login_left_15"
+        android:layout_marginRight="@dimen/login_left_15"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/type1"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_orange"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="选择身份"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_orange_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type3"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="房屋信息"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/type5"
+            android:layout_width="@dimen/dim_90_dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_gray"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="账号信息"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="@dimen/login_left_15"
+        android:text="选择您的身份"
+        android:textColor="#4F5151"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/yezhu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="我是业主"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/login_left_15"
+            android:layout_marginRight="@dimen/login_left_15"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/qingshu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="我是业主家属"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/login_left_15"
+            android:layout_marginRight="@dimen/login_left_15"
+            android:background="#F0F0F0" />
+
+        <RelativeLayout
+            android:id="@+id/zuke"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/login_bottom_10"
+                android:paddingLeft="@dimen/login_left_15"
+                android:paddingTop="@dimen/login_bottom_10"
+                android:text="我是租客"
+                android:textColor="#4F5151"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/login_left_15"
+                android:src="@drawable/ic_item_right" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#F0F0F0" />
+    </LinearLayout>
+
+</LinearLayout>

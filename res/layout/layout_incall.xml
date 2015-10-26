@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_incall"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tv_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dip"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
+
+        <com.lemon95.wyzq.view.call.Dialpad
+            android:id="@+id/dialPad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="6dip"
+            android:paddingRight="6dip"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_call_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <Chronometer
+                android:id="@+id/ch_call_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="8dip"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dip" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/panel_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dip" >
+
+        <RelativeLayout
+            android:id="@+id/panel_call_bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dip"
+            android:visibility="visible" >
+
+            <RelativeLayout
+                android:id="@+id/panel_bottom_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
+
+                <ToggleButton
+                    android:id="@+id/toggle_mute"
+                    style="@style/InCallCompoundButton"
+                    android:background="@drawable/selector_toggle_mute"
+                    android:checked="false" />
+
+                <ToggleButton
+                    android:id="@+id/toggle_dialpad"
+                    style="@style/InCallCompoundButton"
+                    android:layout_toRightOf="@id/toggle_mute"
+                    android:background="@drawable/selector_toggle_dialpad"
+                    android:checked="false" />
+
+                <ToggleButton
+                    android:id="@+id/toggle_speaker"
+                    style="@style/InCallCompoundButton"
+                    android:layout_toRightOf="@id/toggle_dialpad"
+                    android:background="@drawable/selector_toggle_speaker"
+                    android:checked="false" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_hangup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/panel_bottom_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dip"
+                android:background="@drawable/selector_call_refuse" >
+            </Button>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/panel_incoming_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_refuse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/selector_call_refuse" />
+
+            <Button
+                android:id="@+id/btn_connect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:background="@drawable/selector_call_answer" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

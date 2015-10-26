@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffffff</color>
+    <color name="blue">#ff33b5e5</color>
+    <color name="divider">#ffe4e4e4</color>
+    <color name="bg">#ffe3f3ff</color>
+    <color name="bg_title">#ff2ca9df</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="dial_num_pressed">#dbdbe6</color>
+    <color name="dial_num_normal">#f8f7ff</color>
+</resources>
