@@ -1531,5 +1531,114 @@ public class WebServiceUtils {
         }
 		return isParam;
 	}
+
+	public static Result boxlist(String xqid, String phone, int pagesize, int pageid, String bianma) {
+		Result resutl = new Result();
+		List<Map<String,String>> list = new ArrayList<Map<String,String>> ();
+		//  创建httpTranaportSE传输对象
+		HttpTransportSE ht = new HttpTransportSE(WebServiceName.SERVICE_URL);
+		try {  
+            ht.debug = true;  
+            // 使用SOAP1.1协议创建Envelop对象  
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(  
+                    SoapEnvelope.VER11);  
+            // 实例化SoapObject对象  
+            SoapObject soapObject = new SoapObject(WebServiceName.SERVICE_NAMESPACE,  
+            		WebServiceName.boxlist);  
+            soapObject.addProperty("xqid", xqid);
+            soapObject.addProperty("mobile", phone);
+            soapObject.addProperty("pagesize", pagesize);
+            soapObject.addProperty("pageid", pageid);
+            soapObject.addProperty("bianma", "");
+			soapObject.addProperty("mac1", "");
+			soapObject.addProperty("macwifi", "");
+            envelope.headerOut = getHeader();
+            envelope.bodyOut = soapObject;  
+            envelope.dotNet = true;  
+            ht.call(WebServiceName.SERVICE_NAMESPACE + WebServiceName.boxlist, envelope);  
+            if (envelope.getResponse() != null) {  
+                Object res = envelope.getResponse();
+                LogUtils.i("获取绑定设备：", res + "");
+                String result = res.toString();
+                if(!StringUtils.isBlank(result)) {
+                	JSONObject json = new JSONObject(result);
+                	String rows = json.getString("rows");
+                	resutl.setRows(rows);
+                	if ("1".equals(rows)) {
+						JSONArray tab = new JSONArray(json.getString("tab1"));
+						Map<String, String> tab1 = new HashMap<String, String>();
+						tab1.put("macwifi",tab.getJSONObject(0).getString("macwifi"));
+						tab1.put("bianma",tab.getJSONObject(0).getString("bianma"));
+						tab1.put("wyid",tab.getJSONObject(0).getString("wyid"));
+						tab1.put("xqid",tab.getJSONObject(0).getString("xqid"));
+						tab1.put("xinghao",tab.getJSONObject(0).getString("xinghao"));
+						tab1.put("status",tab.getJSONObject(0).getString("status"));
+						tab1.put("op",tab.getJSONObject(0).getString("op"));
+						tab1.put("op_time",tab.getJSONObject(0).getString("op_time"));
+						tab1.put("saler",tab.getJSONObject(0).getString("saler"));
+						tab1.put("saler_time",tab.getJSONObject(0).getString("saler_time"));
+						tab1.put("user_name",tab.getJSONObject(0).getString("user_name"));
+						tab1.put("user_mobile",tab.getJSONObject(0).getString("user_mobile"));
+						tab1.put("use_address",tab.getJSONObject(0).getString("use_address"));
+						tab1.put("user_time",tab.getJSONObject(0).getString("user_time"));
+						resutl.setTab1(tab1);
+					}
+                } else {
+                	resutl.setRows("-1");
+                }
+            }  
+        } catch (Exception e) {
+        	resutl.setRows("-1");
+        }
+		return resutl;
+	}
+
+	public static Result videoclass() {
+		Result resutl = new Result();
+		List<Map<String,String>> list = new ArrayList<Map<String,String>> ();
+		//  创建httpTranaportSE传输对象
+		HttpTransportSE ht = new HttpTransportSE(WebServiceName.SERVICE_URL);
+		try {  
+            ht.debug = true;  
+            // 使用SOAP1.1协议创建Envelop对象  
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(  
+                    SoapEnvelope.VER11);  
+            // 实例化SoapObject对象  
+            SoapObject soapObject = new SoapObject(WebServiceName.SERVICE_NAMESPACE,  
+            		WebServiceName.videoclass);  
+            envelope.headerOut = getHeader();
+            envelope.bodyOut = soapObject;  
+            envelope.dotNet = true;  
+            ht.call(WebServiceName.SERVICE_NAMESPACE + WebServiceName.videoclass, envelope);  
+            if (envelope.getResponse() != null) {  
+                Object res = envelope.getResponse();
+                LogUtils.i("获取视频类型：", res + "");
+                String result = res.toString();
+                if(!StringUtils.isBlank(result)) {
+                	JSONObject json = new JSONObject(result);
+                	String rows = json.getString("rows");
+                	resutl.setRows(rows);
+                	if(Integer.parseInt(rows) >= 1) {
+                		JSONArray tab = new JSONArray(json.getString("tab"));
+                		resutl.setFldTotalPage(tab.getJSONObject(0).getString("fldTotalPage"));
+                		resutl.setFldtotalRecord(tab.getJSONObject(0).getString("fldtotalRecord"));
+                		JSONArray tab1 = new JSONArray(json.getString("tab1"));
+                		for(int j=0; j<tab1.length(); j++) {
+                			Map<String, String> tabMap = new HashMap<String, String>();
+                			tabMap.put("id", tab1.getJSONObject(j).getString("id"));
+                			tabMap.put("title", tab1.getJSONObject(j).getString("title"));
+                			list.add(tabMap);
+                		}
+                		resutl.setList(list);
+                	}
+                } else {
+                	resutl.setRows("0");
+                }
+            }  
+        } catch (Exception e) {
+        	resutl.setRows("0");
+        }
+		return resutl; 
+	}
 	
 }

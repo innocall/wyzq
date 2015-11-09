@@ -51,11 +51,10 @@ public class VideoCtrlView extends ThinkoPlayerCtrlView {
 	private LinearLayout xiantai_list;
 	private ListView xiantai_listView;
 	private MyListAdapter mAdapter;
-	private ArrayList<Channel> channellist;
 	private ThinkoPlayerView mPlayerView;
 	private Button btn_sel;
 	private ArrayList<Channel> resultList = new ArrayList<Channel>();
-	private Handler handler = new Handler() {
+	/*private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case ISSHANG:
@@ -68,27 +67,24 @@ public class VideoCtrlView extends ThinkoPlayerCtrlView {
 				break;
 			}
 		}
-	};
+	};*/
 	
-	public VideoCtrlView(Context act, ThinkoPlayerView mPlayerView) {
+	public VideoCtrlView(Context act, ThinkoPlayerView mPlayerView,ArrayList<Channel> resultList) {
 		super(act);
 		mContext = act;
 		this.mPlayerView = mPlayerView;
+		this.resultList = resultList;
 		initVideoCtrlView();
 	}
 
 	private void initVideoCtrlView() {
 		//初始化sdk
-		/*try{
-			ThinkoEnvironment.setUp(mContext);
-		} catch(Exception e) {
-			LogUtils.i(TAG, "key错误");
-		}*/
 		View layout = View.inflate(mContext, R.layout.layout_videoctrl, this);
 		mTitleView = (TextView) layout.findViewById(R.id.title);
 		xiantai_list = (LinearLayout) layout.findViewById(R.id.xiantai_list);
 		xiantai_listView = (ListView) layout.findViewById(R.id.xiantai_listView);
 		mAdapter = new MyListAdapter();
+		mAdapter.setData(resultList);
 		xiantai_listView.setAdapter(mAdapter);
 		Button back = (Button) layout.findViewById(R.id.btn_exit);
 		btn_sel = (Button) layout.findViewById(R.id.btn_sel);
@@ -125,7 +121,7 @@ public class VideoCtrlView extends ThinkoPlayerCtrlView {
 				xiantai_list.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.xuantai_out));
 			}
 		});
-		getChannenllist(0);
+		//getChannenllist(0);
 	}
 	
 	public void hideListView() {
@@ -154,7 +150,7 @@ public class VideoCtrlView extends ThinkoPlayerCtrlView {
 		mTitleView.setText(title);
 	}
 	
-	public void getChannenllist(final long bid){
+	/*public void getChannenllist(final long bid){
 		
 		ThinkoEnvironment.getChannelList(new OnGetChannelsListener() {
 
@@ -178,7 +174,7 @@ public class VideoCtrlView extends ThinkoPlayerCtrlView {
 			};
 		}.start();
 	}
-
+*/
 	class MyListAdapter extends BaseAdapter {
 
 		private ArrayList<Channel> mDatas;

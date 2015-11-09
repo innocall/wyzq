@@ -79,4 +79,8 @@ public interface WebServiceName {
 	
 	String jihuo = "jihuo";  //激活
 	
+	String boxlist = "boxlist"; //设备列表
+	
+	String videoclass = "videoclass";  //获取视频类型
+	
 }

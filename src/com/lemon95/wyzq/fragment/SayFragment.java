@@ -402,6 +402,7 @@ public class SayFragment extends BaseUI {
 				}
 			}).setNegativeButton("取消", null).show();
 		}*/
+		stopProgressDialog();
 		photoList.clear();
 		j = 0;
 		shop_des.setText("");
@@ -495,7 +496,10 @@ public class SayFragment extends BaseUI {
 			photoList.add(filePaths);
 			setImage();
 		}
-		if (PICTURE == requestCode && resultCode == Activity.RESULT_OK && null != data) {
+		if (PICTURE == requestCode && resultCode == Activity.RESULT_OK && null != data&& null != data.getData()) {
+			if(data != null) {
+				return;
+			}
 			Uri selectedImage = data.getData();
 			String[] filePathColumns = { MediaStore.Images.Media.DATA };
 			Cursor c = context.getContentResolver().query(selectedImage, filePathColumns, null, null, null);

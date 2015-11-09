@@ -229,6 +229,9 @@ public class TitleManager implements Observer {
 				case ConstantValue.SHARELISTFRAGMENT:
 					showLoginTitle("多屏分享");
 					break;
+				case ConstantValue.ADDSHAREFRAGMENT:
+					showLoginTitle("视频分享");
+					break;
 			}
 		}
 

@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.lemon95.wyzq.R;
 import com.lemon95.wyzq.fragment.MainFragment;
 import com.lemon95.wyzq.manage.MiddleManager;
+import com.lemon95.wyzq.myview.dialog.CustomProgressDialog;
 import com.lemon95.wyzq.webserver.WebServiceUtils;
 
 import android.R.animator;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 public class PromptManager {
 	private static ProgressDialog dialog;
 	private static AlertDialog mAlertDialog;
+	private static CustomProgressDialog dialog2;
 	
 	public static void showProgressDialog(Context context, String str) {
 		dialog = new ProgressDialog(context);
@@ -48,6 +50,22 @@ public class PromptManager {
 			dialog.dismiss();
 		}
 	}
+	
+	public static void startProgressDialog(Context context){  
+        if (dialog2 == null){  
+        	dialog2 = CustomProgressDialog.createDialog(context);  
+        	dialog2.hideText();  
+        }  
+        dialog2.setCancelable(false);
+        dialog2.show();  
+    }  
+	
+	public static void stopProgressDialog(){  
+        if (dialog2 != null){  
+        	dialog2.dismiss();  
+        	dialog2 = null;  
+        }  
+    }  
 
 	/**
 	 * 当判断当前手机没有网络时使用
@@ -146,27 +164,46 @@ public class PromptManager {
 		});
 		mAlertDialog.show();
 		mAlertDialog.getWindow().setContentView(view);
-		//builder.setCancelable(false);
-		/*builder.setPositiveButton("拍照", new OnClickListener() {
-
+	}
+	
+	
+	public static void pickVideo(final Context context,final int CAMERA,final int PICTURE) {
+		AlertDialog.Builder builder = new Builder(context);
+		mAlertDialog = builder.create();
+		LayoutInflater inflater = LayoutInflater.from(context);
+		View view = inflater.inflate(R.layout.pic_video_dialog, null);
+		LinearLayout cam_id = (LinearLayout) view.findViewById(R.id.cam_id);
+		cam_id.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				camera.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);  
-                File out = new File(filePath);  
-                Uri uri = Uri.fromFile(out);  
-                // 获取拍照后未压缩的原图片，并保存在uri路径中  
-                camera.putExtra(MediaStore.EXTRA_OUTPUT, uri);   
-				MiddleManager.getInstance().activity.startActivityForResult(camera, CAMERA);
+			public void onClick(View v) {
+				// MediaStore.ACTION_VIDEO_CAPTURE
+				// 从一个既存的Camera应用中申请视频功能的Intent动作类型
+				Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+				// MediaStore.EXTRA_VIDEO_QUALITY：这个值的范围是0~1，0的时候质量最差且文件最小，1的时候质量最高且文件最大。
+				intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+				MiddleManager.getInstance().activity.startActivityForResult(intent, CAMERA);
 			}
-		}).setNegativeButton("图库", new OnClickListener() {
-
+		});
+		LinearLayout pic_id = (LinearLayout) view.findViewById(R.id.pic_id);
+		pic_id.setOnClickListener(new View.OnClickListener() {
+			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent picture = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				MiddleManager.getInstance().activity.startActivityForResult(picture, PICTURE);
+			public void onClick(View v) {
+				Intent intent = new Intent();  
+				 /* 开启Pictures画面Type设定为image */  
+				 //intent.setType(“image/*”); 
+				 //intent.setType(“audio/*”); //选择音频 
+				 //intent.setType(“video/*”); //选择视频 （mp4 3gp 是android支持的视频格式） 
+				 //intent.setType(“video/*;image/*”);//同时选择视频和图片   
+				 /* 使用Intent.ACTION_GET_CONTENT这个Action */  
+				intent.setAction(Intent.ACTION_GET_CONTENT);  
+				intent.setType("video/*"); 
+				MiddleManager.getInstance().activity.startActivityForResult(intent, PICTURE);
 			}
-		}).show();*/
+		});
+		mAlertDialog.show();
+		mAlertDialog.getWindow().setContentView(view);
 	}
 	
 	public static void showRigister(final Context context) {

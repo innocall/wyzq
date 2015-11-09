@@ -277,7 +277,6 @@ public class SlideShowView extends FrameLayout {
 				break;
 			}
 		}
-		
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {

@@ -65,6 +65,9 @@ public interface ConstantValue {
 	int MYSAYFRAGMENT = 14;
 
 	//多屏分享
-	int SHARELISTFRAGMENT = 15;   
+	int SHARELISTFRAGMENT = 15;
+
+	//绑定电视接口
+	int ADDSHAREFRAGMENT = 16;   
 	
 }

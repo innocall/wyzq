@@ -1,11 +1,14 @@
 package com.lemon95.wyzq.view;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.dodola.model.VideoListDate;
 import com.lemon95.wyzq.R;
 import com.lemon95.wyzq.application.ExitApplication;
+import com.lemon95.wyzq.db.SqliteDBHandler;
 import com.lemon95.wyzq.manage.MiddleManager;
 import com.lemon95.wyzq.model.Channel;
 import com.lemon95.wyzq.model.Result;
@@ -91,6 +94,8 @@ public class VideoActivity extends Activity{
 		
 		mChannel = (Channel) getIntent().getSerializableExtra("channel");
 		
+		ArrayList<Channel> arrayList = SqliteDBHandler.init(getApplicationContext()).getAllChannel();
+		
 		mPlayerView = (ThinkoPlayerView) findViewById(R.id.player);
 		mPlayerView.setPlayerListener(mListener);
 		mPlayerView.setAppPackageName("com.lemon95.wyzq");
@@ -102,7 +107,7 @@ public class VideoActivity extends Activity{
 		mPlayerView.setLoadingView(mLoadingView, lp);
 		
 		//自定义播控界面
-		mCtrlView = new VideoCtrlView(this,mPlayerView);
+		mCtrlView = new VideoCtrlView(this,mPlayerView,arrayList);
 		mPlayerView.setMediaCtrlView(mCtrlView);
 		mCtrlView.setTitle(mChannel.nickName);
 		mCtrlView.setVisibility(View.INVISIBLE);
@@ -178,8 +183,6 @@ public class VideoActivity extends Activity{
 		MobclickAgent.onPageEnd(TAG); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息 
 		MobclickAgent.onPause(this);
 	}
-
-
 
 	@Override
 	protected void onDestroy() {

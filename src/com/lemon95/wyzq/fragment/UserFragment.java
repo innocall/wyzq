@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -137,14 +138,22 @@ public class UserFragment extends BaseUI {
 	}
 	
 	private void exitLogin() {
-		Editor ed = sp.edit();
-		ed.remove("PASSWORD");
-		ed.commit();
-		Intent intent = new Intent(MiddleManager.getInstance().activity, LoginActivity.class);
-		MiddleManager.getInstance().activity.startActivity(intent);
-		MiddleManager.getInstance().clear();
-		MiddleManager.getInstance().activity.finish();
-		MiddleManager.getInstance().activity.overridePendingTransition(R.anim.left_in, R.anim.left_up);
+		AlertDialog.Builder builder = new Builder(context);
+		builder.setCancelable(false);
+		builder.setTitle(R.string.app_name).setMessage("退出当前账号?").setPositiveButton("退出", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Editor ed = sp.edit();
+				ed.remove("PASSWORD");
+				ed.commit();
+				Intent intent = new Intent(MiddleManager.getInstance().activity, LoginActivity.class);
+				MiddleManager.getInstance().activity.startActivity(intent);
+				MiddleManager.getInstance().clear();
+				MiddleManager.getInstance().activity.finish();
+				MiddleManager.getInstance().activity.overridePendingTransition(R.anim.left_in, R.anim.left_up);
+			}
+		}).setNegativeButton("取消", null).show();
 	}
 
 	private void isUpdate() {

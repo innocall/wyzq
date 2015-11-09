@@ -7,19 +7,21 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.doordu.sdk.doorduphone.DoorduphoneManager;
+import com.doordu.sdk.http.HttpResponseService;
 import com.lemon95.wyzq.global.ConstantValue;
 import com.lemon95.wyzq.model.Result;
 import com.lemon95.wyzq.utils.AppSystemUtils;
 import com.lemon95.wyzq.utils.DES;
 import com.lemon95.wyzq.utils.NetUtil;
-import com.lemon95.wyzq.utils.PromptManager;
+import com.lemon95.wyzq.view.InCallActivity;
+import com.lemon95.wyzq.view.InComingActivity;
 import com.lemon95.wyzq.view.LoginActivity;
 import com.lemon95.wyzq.view.MainActivity;
 import com.lemon95.wyzq.view.SplashLeadActivity;
 import com.lemon95.wyzq.webserver.WebServiceUtils;
 import com.umeng.analytics.AnalyticsConfig;
 import com.umeng.analytics.MobclickAgent;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -87,6 +89,7 @@ public class SplashActivity extends ActionBarActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_splash);
 		initUmEng();  //初始化友盟sdk
+		initOpenDrop();//门禁初始化
 		sp = getSharedPreferences(ConstantValue.CONFIG, MODE_PRIVATE);
 		splash = sp.getString("version", "");
 		if (NetUtil.isNetWorkConnected(getApplicationContext())) {
@@ -98,6 +101,12 @@ public class SplashActivity extends ActionBarActivity {
 		}
 	}
 	
+	private void initOpenDrop() {
+		HttpResponseService.onCreateRegisterd(this);// 接口注册初始化
+		DoorduphoneManager.setActivityInComingClass(InComingActivity.class);// 接听界面注册初始化
+		DoorduphoneManager.setActivityInCallClass(InCallActivity.class);// 视频界面注册初始化
+	}
+
 	private class LoadMainTabTask implements Runnable {
 
 		public void run() {

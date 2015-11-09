@@ -1,7 +1,11 @@
 package com.lemon95.wyzq.fragment;
 
 import java.util.ArrayList;
+
+import com.dodola.model.VideoListDate;
+import com.feiyucloud.base.b;
 import com.lemon95.wyzq.R;
+import com.lemon95.wyzq.db.SqliteDBHandler;
 import com.lemon95.wyzq.global.ConstantValue;
 import com.lemon95.wyzq.manage.MiddleManager;
 import com.lemon95.wyzq.model.Channel;
@@ -25,6 +29,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -47,30 +52,37 @@ public class VideoListFragment extends BaseUI {
 	private ArrayList<Channel> resultList;
 	private AsyncImageLoader asyncImageLoader;
 	private MyListAdapter mAdapter;
-	private AnimationDrawable animaition;
+	//private AnimationDrawable animaition;
 	private TextView tab1;
 	private TextView tab2;
 	private TextView tab3;
-	private int point = 2;
+	private int point = 0;
+	private DChannel[] channellist2;
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case ISSHANG:
 				if(resultList != null) {
 					if(resultList.size() > 0) {
-						mAdapter.setData(resultList);
-						mAdapter.notifyDataSetChanged();
-						accetp_ll_load.setVisibility(View.GONE);
-						listVideo.setVisibility(View.VISIBLE);
+						if(point == 0) {
+							point = 2;
+							getChannenllist(point,false);
+						} else {
+							mAdapter.setData(resultList);
+							mAdapter.notifyDataSetChanged();
+							accetp_ll_load.setVisibility(View.GONE);
+							listVideo.setVisibility(View.VISIBLE);
+							PromptManager.stopProgressDialog();
+						}
 					} else {
-						animaition.stop();
 						accetp_iv_load.setVisibility(View.GONE);
 						accept_no_order1.setText("没有获取到节目列表");
+						PromptManager.stopProgressDialog();
 					}
 				} else {
-					animaition.stop();
 					accetp_iv_load.setVisibility(View.GONE);
 					accept_no_order1.setText("没有获取到节目列表");
+					PromptManager.stopProgressDialog();
 				}
 				break;
 			}
@@ -90,7 +102,7 @@ public class VideoListFragment extends BaseUI {
 			LogUtils.i(TAG, "key错误");
 		}
 		showInMiddle = (LinearLayout) View.inflate(context, R.layout.videolist_fragment, null);
-		
+		//初始化数据库
 		accetp_ll_load = (LinearLayout)findViewById(R.id.accetp_ll_load);
 		accetp_iv_load = (ImageView)findViewById(R.id.accetp_iv_load);
 		accept_no_order1 = (TextView)findViewById(R.id.accept_no_order1);
@@ -98,15 +110,13 @@ public class VideoListFragment extends BaseUI {
 		tab2 = (TextView)findViewById(R.id.tab2);
 		tab3 = (TextView)findViewById(R.id.tab3);
 		accetp_iv_load.setBackgroundResource(R.anim.load);
-		animaition = (AnimationDrawable)accetp_iv_load.getBackground();
+	/*	animaition = (AnimationDrawable)accetp_iv_load.getBackground();
 		animaition.setOneShot(false);
-		animaition.start();
+		animaition.start();*/
 		accetp_iv_load.setVisibility(View.VISIBLE);
-		accetp_ll_load.setVisibility(View.VISIBLE);
+		accetp_ll_load.setVisibility(View.GONE);
 		asyncImageLoader = new AsyncImageLoader(context,200,200);
-		
 		listVideo = (ListView) findViewById(R.id.list);
-		
 		mAdapter = new MyListAdapter();
 		listVideo.setAdapter(mAdapter);
 	}
@@ -164,12 +174,13 @@ public class VideoListFragment extends BaseUI {
 	public void onResume() {
 		super.onResume();
 		//通过api获取频道列表
-		getChannenllist(point);
+		PromptManager.startProgressDialog(context);
+		getChannenllist(point,true);
 		MobclickAgent.onPageStart(TAG); //统计页面(仅有Activity的应用中SDK自动调用，不需要单独写)
 		MobclickAgent.onResume(context);
 	}
 	
-	public void getChannenllist(final long bid){
+	public void getChannenllist(final long bid,boolean isOne){
 		if(bid == 2) {
 			tab1.setBackgroundColor(Color.parseColor("#ffffff"));
 			tab2.setBackgroundColor(Color.parseColor("#efefef"));
@@ -183,14 +194,23 @@ public class VideoListFragment extends BaseUI {
 			tab2.setBackgroundColor(Color.parseColor("#efefef"));
 			tab3.setBackgroundColor(Color.parseColor("#ffffff"));
 		}
-		
-		ThinkoEnvironment.getChannelList(new OnGetChannelsListener() {
+		if(isOne) {
+			ThinkoEnvironment.getChannelList(new OnGetChannelsListener() {
 
-			@Override
-			public void getChannelList(DChannel[] channellist) {
-				isUpLive(channellist,bid);
+				@Override
+				public void getChannelList(DChannel[] channellist) {
+					channellist2 = channellist;
+					//初始化所有
+					isUpLive(channellist,0);
+				}
+			});
+		} else {
+			if(channellist2 != null) {
+				isUpLive(channellist2,bid);
+			} else {
+				getChannenllist(bid,true);
 			}
-		});
+		}
 	}
 	
 	protected void isUpLive(final DChannel[] channellist,final long bid) {
@@ -200,6 +220,12 @@ public class VideoListFragment extends BaseUI {
 		new Thread(){
 			public void run() {
 				resultList = WebServiceUtils.tv(channellist,bid);
+				if(bid == 0) {
+					//插入数据库
+					if(resultList != null) {
+						SqliteDBHandler.init(context).saveDeleteChannel(resultList);
+					}
+				}
 				Message msg = new Message();
 				msg.what = ISSHANG;
 				handler.sendMessage(msg);
@@ -210,7 +236,12 @@ public class VideoListFragment extends BaseUI {
 	@Override
 	public void onPause() {
 		super.onPause();
-		//MiddleManager.getInstance().clearNew(VideoListFragment.class);
+		point = 0;
+		if(resultList != null) {
+			resultList.clear();
+		}
+		channellist2 = null;
+		MiddleManager.getInstance().clearNew(VideoListFragment.class);
 		MobclickAgent.onPageEnd(TAG); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息 
 		MobclickAgent.onPause(context);
 		//sdk释放
@@ -274,15 +305,15 @@ public class VideoListFragment extends BaseUI {
 //				tab2.setBackgroundColor(Color.parseColor("#efefef"));
 //				tab3.setBackgroundColor(Color.parseColor("#efefef"));
 				point = 2;
-				getChannenllist(point);  //央视
+				getChannenllist(point,false);  //央视
 				break;
 			case R.id.tab2:
 				point = 1;
-				getChannenllist(point);  //卫视
+				getChannenllist(point,false);  //卫视
 				break;
 			case R.id.tab3:
 				point = 3;
-				getChannenllist(point);  //地方台
+				getChannenllist(point,false);  //地方台
 				break;
 		}
 	}
@@ -290,13 +321,13 @@ public class VideoListFragment extends BaseUI {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == 1) {
+		/*if(requestCode == 1) {
 			LogUtils.i(TAG, "后退进入");
 			tab1.setBackgroundColor(Color.parseColor("#ffffff"));
 			tab2.setBackgroundColor(Color.parseColor("#efefef"));
 			tab3.setBackgroundColor(Color.parseColor("#efefef"));
 			getChannenllist(point);
-		}
+		}*/
 	}
 	
 }

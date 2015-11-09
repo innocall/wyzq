@@ -1,23 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F0F0"
     android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/open_id"
+    <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:cacheColorHint="#00000000">
-    </ListView>
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/accept_no_order1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="25dp"
-        android:text="您小区没有设置远程门禁"
-        android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+            
+            <com.lemon95.wyzq.myview.arclayout.ArcLayout
+                android:id="@id/arc_layout"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="0dp"
+                app:arc_axisRadius="@dimen/layout_child_offset_medium"
+                app:arc_origin="center"
+                app:arc_radius="@dimen/layout_radius_medium" >
+
+                <Button
+                    style="@style/Item.Medium"
+                    android:background="@drawable/light_blue_oval_selector"
+                    android:text="A" />
+
+                <Button
+                    style="@style/Item.Medium"
+                    android:background="@drawable/cyan_oval_selector"
+                    android:text="B" />
+
+                <Button
+                    style="@style/Item.Medium"
+                    android:background="@drawable/teal_oval_selector"
+                    android:text="C" />
+
+                <Button
+                    style="@style/Item.Medium"
+                    android:background="@drawable/green_oval_selector"
+                    android:text="D" />
+
+                <Button
+                    style="@style/Item.Medium"
+                    android:background="@drawable/light_green_oval_selector"
+                    android:text="E" />
+            </com.lemon95.wyzq.myview.arclayout.ArcLayout>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:background="@drawable/bg_edit"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="8"
+                android:background="#FFFFFF" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:background="@drawable/edit_rigiht" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/dorp_bg" >
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/phone_icon" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/key_page"
+            android:scaleType="center" />
+    </RelativeLayout>
 
 </LinearLayout>

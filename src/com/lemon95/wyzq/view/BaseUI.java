@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 
 /**
  * 所有界面的基类
+ * 
  * @author wuxt
  */
 public abstract class BaseUI implements View.OnClickListener {
@@ -44,31 +45,10 @@ public abstract class BaseUI implements View.OnClickListener {
 	// 显示到中间容器
 	protected ViewGroup showInMiddle;
 	private Result res;
-	List<Map<String,String>> list;
+	List<Map<String, String>> list;
 	private String filePath;
 	private String filePath2;
-	protected int w,h;
-	
-	private Handler handler = new Handler() {
-		public void handleMessage(android.os.Message msg) {
-			switch(TYPE) {
-				case TYPE:
-					if(res != null) {
-						if(Integer.parseInt(res.getRows()) > 0) {
-							list = res.getList();
-							String []itmes = new String [list.size()];
-							for(int i=0; i<list.size(); i++) {
-								itmes[i] = list.get(i).get("title");
-							}
-							showListView(itmes);
-						}
-					} else {
-						PromptManager.showToast(context, "没有获取到说说类型");
-					}
-					break;
-			}
-		};
-	};
+	protected int w, h;
 
 	public BaseUI(Context context) {
 		this.context = context;
@@ -196,64 +176,14 @@ public abstract class BaseUI implements View.OnClickListener {
 	 * 我要说说
 	 */
 	public void say() {
-		filePath2 = ImageUtils.getPhotopath();
-		PromptManager.pickIMage(context, CAMERA, PICTURE,filePath2); // 弹出选择照片框
+		
 	}
 
 	/**
 	 * 处理拍照后调用
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == CAMERA && resultCode == Activity.RESULT_OK) {
-			 Bitmap bitmap = ImageUtils.decodeFileToCompress2(filePath2,w - 80,h - 80); 
-			 filePath = ImageUtils.saveScalePhoto(bitmap);  
-			// 显示图片
-			getType();
-		}
-		if (requestCode == PICTURE && resultCode == Activity.RESULT_OK && null != data) {
-			Uri selectedImage = data.getData();
-			String[] filePathColumns = { MediaStore.Images.Media.DATA };
-			Cursor c = context.getContentResolver().query(selectedImage, filePathColumns, null, null, null);
-			if(c != null){
-				c.moveToFirst();
-				int columnIndex = c.getColumnIndex(filePathColumns[0]);
-				filePath = c.getString(columnIndex);
-				c.close();
-				// 获取图片并显示
-				getType();
-			}
-		}
-	}
-	
-	private void getType() {
-		new Thread() {
-			public void run() {
-				res = WebServiceUtils.bbslist(0);
-				Message msg = new Message();
-				msg.what = TYPE;
-				handler.sendMessage(msg);
-			};
-		}.start();
-	}
-	
-	public void showListView(String []items) {
-		AlertDialog.Builder builder = new Builder(context);
-		builder.setTitle("选择标签");
-		builder.setItems(items, new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Bundle bundle1 = new Bundle();
-				bundle1.putString("filePath", filePath);
-				Map<String,String> map = list.get(which);
-				if(map != null) {
-					bundle1.putString("id", map.get("id"));
-					bundle1.putString("title", map.get("title"));
-				}
-				MiddleManager.getInstance().changeUI(SayFragment.class,bundle1);
-			}
-		});
-		builder.show();
+		
 	}
 
 }

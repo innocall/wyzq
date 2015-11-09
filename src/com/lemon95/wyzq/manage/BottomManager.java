@@ -254,6 +254,9 @@ public class BottomManager implements Observer {
 				case ConstantValue.SHARELISTFRAGMENT:
 					hideBottom();
 					break;
+				case ConstantValue.ADDSHAREFRAGMENT:
+					hideBottom();
+					break;
 			}
 		}
 

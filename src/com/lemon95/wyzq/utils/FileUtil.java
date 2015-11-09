@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -66,6 +69,42 @@ public class FileUtil {
 		   }
 		}
 	   return fileName;
+	}
+	
+	public static String getVideoPath(String fileUrl){
+		if(!StringUtils.isBlank(fileUrl)){
+			fileUrl = fileUrl.substring(fileUrl.lastIndexOf("/") + 1, fileUrl.length());
+		}
+	    return fileUrl;
+	}
+	
+	/**
+	 * 随机获取视频图片
+	 * @param filePath
+	 * @return
+	 */
+	public static Bitmap getVideoThumbnail(String filePath) {
+		Bitmap bitmap = null;
+		MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+		try {
+			retriever.setDataSource(filePath);
+			bitmap = retriever.getFrameAtTime();
+		} 
+		catch(IllegalArgumentException e) {
+			e.printStackTrace();
+		} 
+		catch (RuntimeException e) {
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				retriever.release();
+			} 
+			catch (RuntimeException e) {
+				e.printStackTrace();
+			}
+		}
+		return bitmap;
 	}
 
 }

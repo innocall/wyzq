@@ -3,6 +3,11 @@ package com.lemon95.wyzq.application;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.doordu.sdk.doorduphone.DoorduphoneManager;
+import com.doordu.sdk.http.HttpResponseService;
+import com.lemon95.wyzq.view.InCallActivity;
+import com.lemon95.wyzq.view.InComingActivity;
+
 import android.app.Activity;
 import android.app.Application;
 
@@ -14,7 +19,7 @@ public class ExitApplication extends Application {
 	private ExitApplication() {
 		// 单例模式中获取唯一的ExitApplication实例
 	}
-
+	
 	public static ExitApplication getInstance() {
 		if (null == instance) {
 			instance = new ExitApplication();

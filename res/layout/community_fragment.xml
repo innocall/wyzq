@@ -159,7 +159,7 @@
                     android:layout_height="@dimen/dim_50_dp"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/qian">
+                    android:src="@drawable/video_share">
                 </ImageView>
             </LinearLayout>
         </LinearLayout>
